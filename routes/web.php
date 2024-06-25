@@ -32,17 +32,26 @@ Route::get('/censo-digital', function () {
 // Route::get('/form', function () {
 //     return view('app.censo.form');
 // })->name('form');
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard.results');
+])->get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->get('/form', [CensoController::class, 'form'])->name('form');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->get('/show-code-form', [CensoController::class, 'show_code_form'])->name('show.code.form');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

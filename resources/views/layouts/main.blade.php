@@ -18,7 +18,7 @@
     <script src="https://kit.fontawesome.com/0bda3aa28f.js" crossorigin="anonymous"></script>
 
 
-  
+
 
 
     <!-- Scripts -->
@@ -343,18 +343,37 @@
                                         aria-label="Authentication">
                                         <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                                         <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                                        <a href="#" role="menuitem"
-                                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
-                                            Registro
-                                        </a>
-                                        <a href="#" role="menuitem"
-                                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
-                                            Iniciar Sesión
-                                        </a>
-                                        <a href="#" role="menuitem"
-                                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
-                                            Restablecer contraseña
-                                        </a>
+
+                                        @if (auth()->user())
+                                            <a  href="{{ route('profile.show') }}"
+                                                class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
+                                                Pefil
+                                            </a>
+                                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                                @csrf
+
+                                                <button href="{{ route('logout') }}"
+                                                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                                                    @click.prevent="$root.submit();">
+                                                    Cerrar Sesión
+                                                </button>
+                                            </form>
+
+                                            <a href="#" role="menuitem"
+                                                class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
+                                                Restablecer contraseña
+                                            </a>
+                                        @else
+                                            <a href="{{ route('register') }}" role="menuitem"
+                                                class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
+                                                Registro
+                                            </a>
+                                            <a href="{{ route('login') }}" role="menuitem"
+                                                class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
+                                                Iniciar Sesión
+                                            </a>
+                                        @endif
+
                                     </div>
                                 </div>
                     </nav>
@@ -474,43 +493,7 @@
                                 </svg>
                             </button>
 
-                            <!-- User avatar button -->
-                            <div class="relative" x-data="{ open: false }">
-                                <button @click="open = !open; $nextTick(() => { if(open){ $refs.userMenu.focus() } })"
-                                    type="button" aria-haspopup="true" :aria-expanded="open ? 'true' : 'false'"
-                                    class="transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100">
-                                    <span class="sr-only">User menu</span>
-                                    <img class="w-10 h-10 rounded-full"
-                                        src="https://avatars.githubusercontent.com/u/57622665?s=460&u=8f581f4c4acd4c18c33a87b3e6476112325e8b38&v=4"
-                                        alt="Ahmed Kamel" />
-                                </button>
-
-                                <!-- User dropdown menu -->
-                                <div x-show="open" x-ref="userMenu"
-                                    x-transition:enter="transition-all transform ease-out"
-                                    x-transition:enter-start="translate-y-1/2 opacity-0"
-                                    x-transition:enter-end="translate-y-0 opacity-100"
-                                    x-transition:leave="transition-all transform ease-in"
-                                    x-transition:leave-start="translate-y-0 opacity-100"
-                                    x-transition:leave-end="translate-y-1/2 opacity-0" @click.away="open = false"
-                                    @keydown.escape="open = false"
-                                    class="absolute right-0 w-48 py-1 bg-white rounded-md shadow-lg top-12 ring-1 ring-black ring-opacity-5 dark:bg-dark focus:outline-none"
-                                    tabindex="-1" role="menu" aria-orientation="vertical"
-                                    aria-label="User menu">
-                                    <a href="#" role="menuitem"
-                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600">
-                                        Perfil
-                                    </a>
-                                    <a href="#" role="menuitem"
-                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600">
-                                        Ajustes
-                                    </a>
-                                    <a href="#" role="menuitem"
-                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600">
-                                        Cerrar Sesión
-                                    </a>
-                                </div>
-                            </div>
+                           
                         </nav>
 
                         <!-- Mobile sub menu -->
@@ -588,40 +571,6 @@
 
                             </div>
 
-                            <!-- User avatar button -->
-                            <div class="relative ml-auto" x-data="{ open: false }">
-                                <button @click="open = !open" type="button" aria-haspopup="true"
-                                    :aria-expanded="open ? 'true' : 'false'"
-                                    class="block transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100">
-                                    <span class="sr-only">Menú de usuario</span>
-                                    <img class="w-10 h-10 rounded-full"
-                                        src="https://avatars.githubusercontent.com/u/57622665?s=460&u=8f581f4c4acd4c18c33a87b3e6476112325e8b38&v=4"
-                                        alt="Ahmed Kamel" />
-                                </button>
-
-                                <!-- User dropdown menu -->
-                                <div x-show="open" x-transition:enter="transition-all transform ease-out"
-                                    x-transition:enter-start="translate-y-1/2 opacity-0"
-                                    x-transition:enter-end="translate-y-0 opacity-100"
-                                    x-transition:leave="transition-all transform ease-in"
-                                    x-transition:leave-start="translate-y-0 opacity-100"
-                                    x-transition:leave-end="translate-y-1/2 opacity-0" @click.away="open = false"
-                                    class="absolute right-0 w-48 py-1 origin-top-right bg-white rounded-md shadow-lg top-12 ring-1 ring-black ring-opacity-5 dark:bg-dark"
-                                    role="menu" aria-orientation="vertical" aria-label="User menu">
-                                    <a href="#" role="menuitem"
-                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600">
-                                        Perfil
-                                    </a>
-                                    <a href="#" role="menuitem"
-                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600">
-                                        Ajustes
-                                    </a>
-                                    <a href="#" role="menuitem"
-                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600">
-                                        Cerrar Sesión
-                                    </a>
-                                </div>
-                            </div>
                         </nav>
                     </div>
                     <!-- Mobile main manu -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Censo;
 
 use App\Http\Controllers\Controller;
 use App\Mail\MyEmail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -14,8 +15,16 @@ class CensoController extends Controller
 
     public function form()
     {
+        return view('app.censo.form');
+    }
+
+    public function show_code_form(){
         $random_number = $this->generateRandomString(10);
-        return view('app.censo.form', compact('random_number'));
+        $current_user = Auth::user();
+        $user = User::find($current_user->id);
+        $user->code_censo = $random_number;
+        $user->update();
+        return view('app.censo.show-code-form', compact('random_number'));
     }
     public function generateRandomString($length = 10)
     {

@@ -68,9 +68,9 @@ class CensoDigital extends Component
         // dd($request->code);
         if ($this->current_code == $this->current_user->code_censo) {
 
-            $this->tipo_vivienda = $this->current_user->form->tipoVivienda->tipo_vivienda_name;
-            $this->personas_vivienda = $this->current_user->form->personaVivienda->cantidad_personas_vivienda;
-            $this->lista_personas =$this->current_user->form->personas;
+            $this->tipo_vivienda = $this->current_user->form->tipoVivienda?->tipo_vivienda_name ?? "";
+            $this->personas_vivienda = $this->current_user->form->personaVivienda?->cantidad_personas_vivienda ?? "";
+            $this->lista_personas =$this->current_user->form->personas?? [];
             $this->show_modal_code = false;
             $this->dispatch('swal', [
                 'icon' => 'success',
@@ -84,7 +84,14 @@ class CensoDigital extends Component
                 'title' => '¡Ups!',
                 'text' => 'Por favor, verifique el código introducido.',
             ]);
+
         }
+    }
+
+    public function saveProgress(){
+        $this->tipo_vivienda = $this->current_user->form->tipoVivienda?->tipo_vivienda_name ?? "";
+        $this->personas_vivienda = $this->current_user->form->personaVivienda?->cantidad_personas_vivienda ?? "";
+        $this->lista_personas =$this->current_user->form->personas?? [];
     }
 
     public function render()
