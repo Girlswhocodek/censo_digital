@@ -40,15 +40,18 @@ class CensoDigital extends Component
         Persona::create([
             'nombre' => $this->nombre,
             'rol' => $this->rol,
+            'sexo' => $this->sexo,
             'edad' => $this->edad,
-            'person' => $this->person,
             'formulario_censo_id' => $this->current_user->form->id,
         ]);
 
+        $this->lista_personas =$this->current_user->form->personas;
+
+
         $this->dispatch('swal', [
             'icon' => 'error',
-            'title' => '¡Ups!',
-            'text' => 'Por favor, verifique el código introducido.',
+            'title' => 'Bien Hecho!',
+            'text' => 'Persona agregada correctamente.',
         ]);
 
         $this->reset('show_modal_add_person', 'nombre', 'rol', 'sexo', 'edad');

@@ -662,7 +662,7 @@
                                 </div>
                             </div>
                         </div>
-                        <x-button wire:click="openModalAddPerson">Añadir denunciado</x-button>
+                        <x-button wire:click.prevent="openModalAddPerson">Añadir denunciado</x-button>
                     </div>
 
                     <div class="field btns">

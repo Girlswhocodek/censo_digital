@@ -16,6 +16,11 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/0bda3aa28f.js" crossorigin="anonymous"></script>
+
+
+  
+
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -1333,7 +1338,7 @@
 
 
 
-    
+
 
     <script>
         const setup = () => {
@@ -1404,13 +1409,11 @@
 
 
 
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.6.x/dist/component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script> --}}
     @livewireScripts
+
 
     @stack('js')
 
@@ -1425,6 +1428,9 @@
             Swal.fire(data[0]);
         });
     </script>
+
+
+
 
 </body>
 
